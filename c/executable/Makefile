@@ -1,8 +1,13 @@
 SRC_DIR = src
 BIN_DIR = bin
+DEBUG ?= false
 
 CC = gcc
 CFLAGS = --std=c11 -I$(SRC_DIR)
+
+ifeq ($(DEBUG),true)
+	CFLAGS += -g -DDEBUG
+endif
 
 WIN_EXECUTABLE_NAME = test.exe
 OTHER_EXECUTABLE_NAME = test
