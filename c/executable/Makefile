@@ -1,21 +1,7 @@
-SRC_DIR = src
-BIN_DIR = bin
-DEBUG ?= false
-
-CC = gcc
-CFLAGS = --std=c11 -I$(SRC_DIR)
+include config.mk
 
 ifeq ($(DEBUG),true)
-	CFLAGS += -g -DDEBUG
-endif
-
-WIN_EXECUTABLE_NAME = test.exe
-OTHER_EXECUTABLE_NAME = test
-
-ifeq ($(OS),Windows_NT)
-	EXECUTABLE_NAME = $(WIN_EXECUTABLE_NAME)
-else
-	EXECUTABLE_NAME = $(OTHER_EXECUTABLE_NAME)
+	CFLAGS += -g -D$(DEBUG_MACRO_NAME)
 endif
 
 include sources.mk
@@ -26,12 +12,18 @@ all: $(EXECUTABLE_NAME)
 clean:
 	$(RM) $(BINARIES) $(EXECUTABLE_NAME)
 
-.PHONY: all clean
+install: all
+	$(CP) $(EXECUTABLE_NAME) $(INSTALL_PATH)
+
+uninstall:
+	-$(RM) $(INSTALL_PATH)
+
+.PHONY: all clean install uninstall
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
-	-mkdir $(dir $@)
+	-$(MKDIR) $(dir $@)
 	$(CC) $(CFLAGS) -o $@ -c $^
 
 $(EXECUTABLE_NAME): $(BINARIES)
-	-mkdir $(dir $@)
+	-$(MKDIR) $(dir $@)
 	$(CC) $(CFLAGS) -o $@ $<
