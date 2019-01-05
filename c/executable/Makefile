@@ -26,4 +26,4 @@ $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(EXECUTABLE_NAME): $(BINARIES) $(CSTATICLIBS)
 	-$(MKDIR) $(dir $@)
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $^
