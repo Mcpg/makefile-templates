@@ -32,7 +32,7 @@ uninstall_headers:
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
 	-$(MKDIR) $(dir $@)
-	$(CC) $(CFLAGS) -o $@ -c $^
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(SHAREDLIB_FILENAME): $(BINARIES) $(CSTATICLIBS)
 	-$(MKDIR) $(dir $@)
