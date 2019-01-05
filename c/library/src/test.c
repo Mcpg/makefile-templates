@@ -5,6 +5,6 @@ void test_hello_message()
 {
     printf(TEST_MESSAGE " world!\n");
     #ifdef DEBUG
-    printf("This is a DEBUG build of the executable.\n");
+    printf("This is a DEBUG build of the library.\n");
     #endif 
 }
